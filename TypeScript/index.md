@@ -845,8 +845,3 @@ type FunctionReturnType = ReturnType<FunctionType>  // boolean | string
   | Parameters<T>                   | 获取函数参数类型组成的元组          |
   | ReturnType<T>                   | 获取函数返回值类型                  |
 
-## 写在后面
-
-如果有写的不对或不严谨的地方，欢迎大家能提出宝贵的意见，十分感谢。
-
-如果喜欢或者有所帮助，欢迎 Star，对作者也是一种鼓励和支持
