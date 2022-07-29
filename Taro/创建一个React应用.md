@@ -1,13 +1,19 @@
 ## 创建并启动项目
 在全局安装了Taro Cli 之后， 我们就可以用 Taro提供的cli 来创建一个项目：
-![图片]("./images/install.png")
+
+<img src="./images/install.png" />
+
+<!-- ![图片](https://github.com/xianguoGou/Blog/blob/main/Taro/images/install.png) -->
+
+
 >**我这里用的是Taro v3.3.1版本，不同版本可能有一些语法不同**
 
 然后进入到项目`cd Demo01`, 可以查看到当前目录结构。
 
 打开`package.json`文件，可以看到build到不同终端的命令，这里我们生成一个h5项目，运行`yarn dev: h5`， 如图所示：
 
-![start]("./images/start.png")
+<!-- ![start]("./images/start.png") -->
+<img src="./images/start.png" />
 
 最后会默认在浏览器打开一个窗口，此时h5项目已经启动，接下来就可以开始写业务代码了。
 
