@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul>
+      <li style="order: 3">1</li>
+      <li style="order: 2">2</li>
+      <li style="order: 1">3</li>
+      <li style="order: 4">4</li>
+      <li style="order: 5">5</li>
+    </ul>
+  </body>
+  <script>
+    // function swap(a, b) {
+    //   const min = Math.min(a, b);
+    //   const max = Math.max(a, b);
+    //   console.log(min, max);
+    //   const ul = document.querySelector("ul");
+    //   const li = ul.children;
+    //   console.log(li);
+
+    //   ul.insertBefore(li[max - 1], li[min - 1]);
+    //   ul.insertBefore(li[min], li[max]);
+    // }
+    // swap(1, 3);
+    const swap = (
+      i,
+      j,
+      a = $$("li")[i],
+      b = $$("li")[j],
+      t = document.createElement("div"),
+      t2 = document.createElement("div")
+    ) =>
+      a.replaceWith(t) ||
+      b.replaceWith(t2) ||
+      t.replaceWith(b) ||
+      t2.replaceWith(a);
+
+    swap(0, 2);
+  </script>
+</html>

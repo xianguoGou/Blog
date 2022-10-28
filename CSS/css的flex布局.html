@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* ◆公共样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ul {
+      float: left;
+      margin: 10px 0 0 10px;
+      width: 80px;
+      height: 100px;
+      background-color: #ccc;
+      border-radius: 5px;
+    }
+
+    li {
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: red;
+    }
+  </style>
+  <style>
+    .ul1 {
+      display: flex;
+      justify-content: center;
+    }
+    .ul1 > li {
+      align-self: center;
+    }
+    .ul2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .ul3 {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 5px;
+    }
+    .ul3 li:nth-child(2) {
+      align-self: center;
+    }
+    .ul3 li:nth-child(3) {
+      align-self: flex-end;
+    }
+    .ul4 {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .ul4 li {
+      margin: 15px 10px;
+    }
+    .ul5 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .ul5 li:nth-child(3) {
+      margin: 0 30px;
+    }
+    .ul6 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .ul6 li {
+      margin: 0 10px;
+    }
+    .ul8 {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .ul8 li {
+      margin: 0 10px;
+    }
+    .ul9 {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: center;
+      padding: 5px;
+    }
+  </style>
+  <body>
+    <!-- ◆基础布局 -->
+    <ul class="ul1">
+      <li></li>
+    </ul>
+    <ul class="ul2">
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="ul3">
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="ul4">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="ul5">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="ul6">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="ul7">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="ul8">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <ul class="ul9">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .sign {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+  
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(30deg);  /* 1.相对父级元素垂直水平居中 2.调整起笔角度 */
+  
+      /* background: repeating-conic-gradient(
+        black,
+        black 60deg,
+        yellow 60deg, 
+        yellow 120deg
+      ); */
+      background: repeating-conic-gradient(from -30deg, yellow -30deg 30deg, black 30deg 90deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="sign"></div>
+</body>
+</html>

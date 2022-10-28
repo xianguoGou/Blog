@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    #box {
+      border: 1px solid;
+      width: 200px;
+      height: 80px;
+      /* 如果是字母或数字，宽度不够则强制换行 */
+      word-wrap: break-word;
+      overflow: auto;
+    }
+  </style>
+  <body>
+    <div id="box"></div>
+  </body>
+  <script>
+    const text =
+      "sdsfsfsfsfsfsfsfsfswwwwwww22324234234sfdsdfdsfsfsdfdsfsfsdfsdfddfsfs111qqqqqqqqqqqq22222222wwwww2222222222222222222";
+    let el = document.getElementById("box");
+    for (let i = 0; i < text.length; i++) {
+      /* 让文本内容长度递增 */
+      el.innerHTML = text.slice(0, i);
+      /* 如果当前文本所在元素的高度，小于滚动条内容的高度 */
+      if (el.offsetHeight < el.scrollHeight) {
+        /* 溢出内容做隐藏处理 */
+        el.style.overflow = "hidden"
+        /* 截取末尾三个字符，用...替代 */
+        el.innerHTML = text.slice(0, i - 3) + "...";
+        break;
+      }
+    }
+  </script>
+</html>

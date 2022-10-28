@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      width: 300px;
+      height: auto;
+      margin: 20px auto;
+      border: 1px solid;
+    }
+    /* 单行 */
+    .single-text-overflow {
+      overflow: hidden;
+      /* 文字一行显示，不换行 */
+      white-space: nowrap;
+      /* 当文本溢出时，以省略号表示超出的文本 */
+      text-overflow: ellipsis;
+    }
+     /* 多行 */
+    .multiline-text-overflow {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* 设置为弹性伸缩盒子模型 */
+      display: -webkit-box;
+      /* 限制在一个块元素显示的文本的行数, 最多显示2行 */
+      -webkit-line-clamp: 3;
+      /* 设置伸缩盒子的子元素的排列方式*/
+      -webkit-box-orient: vertical;
+      /* 英文字符文本间的单词断行 */
+      word-break: break-all;
+    }
+  </style>
+  <body>
+    <div class="box single-text-overflow">
+      sdsfsfsfsfsfsfsfsfswwwwwww22324234234sfdsdfdsfsfsdfdsfsfsdfsdfddfsfs111222222222222222222222222222
+    </div>
+    <div class="box multiline-text-overflow">
+      sdsfsfsfsfsfsfsfsfswwwwwww22324234234sfdsdfdsfsfsdfdsfsfsdfsdfddfsfs111qqqqqqqqqqqq22222222wwwww2222222222222222222
+    </div>
+    <div class="box single-text-overflow">
+      一段单行文本一段单行文本一段单行文本一段单行文本一段单行文本一段单行文本一段单行文本一段单行文本一段单行文本
+    </div>
+    <div class="box multiline-text-overflow">
+      一段多行文本我是一段多行文本我是一段多行文本我是一段多行文本我是一段多行文本我是一段多行文本我是一段多行文本我是一段多行文本我是一段多行文本
+    </div>
+  </body>
+</html>
