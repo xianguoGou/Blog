@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 200px;
+        height: 200px;
+        border: 1px solid;
+        margin: 100px auto;
+      }
+      .box:hover {
+        /* 
+          CSS Animation需要指定动画一个周期持续的时间，以及动画效果的名称。
+          "infinite" 无限循环
+          "forwards" 动画执行结束后，保持在结束状态
+        */
+        animation: 1s rainbow infinite;
+      }
+      @keyframes rainbow {
+        0% {
+          background: #c00;
+        }
+        50% {
+          background: orange;
+        }
+        100% {
+          background: yellowgreen;
+        }
+      }
+
+      /* demo1  */
+      .heart {
+        display: block;
+        width: 300px;
+        height: 300px;
+        margin: 100px auto 0;
+        animation: pound .3s infinite;
+      }
+      @keyframes pound {
+        from { transform: none; }
+        to { transform: scale(1.2); }
+      }
+
+      /* css打字效果  */
+      @keyframes typing { from { width: 0; } }
+      @keyframes blink-caret { 50% { border-color: transparent; } }
+
+      h1 { 
+        font: bold 200% Consolas, Monaco, monospace;
+        border-right: .1em solid;
+        width: 16.5em; /* fallback */
+        width: 30ch; /* # of chars */
+        margin: 2em 1em;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: typing 20s steps(30, end), /* # of steps = # of chars */
+                  blink-caret .5s step-end infinite alternate;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+
+    <img class="heart" src="./images/heart.svg"></img>
+
+    <h1>Typing animation by Lea Verou.</h1>
+  </body>
+</html>

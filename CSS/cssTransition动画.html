@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /*
+      transition的局限：
+      （1）transition需要事件触发，所以没法在网页加载时自动发生。
+
+      （2）transition是一次性的，不能重复发生，除非一再触发。
+
+      （3）transition只能定义开始状态和结束状态，不能定义中间状态，也就是说只有两个状态。
+
+      （4）一条transition规则，只能定义一个属性的变化，不能涉及多个属性。
+    */
+    /*
+      transition的作用在于，指定状态变化所需要的时间。
+      transition: 0.3s;
+    */
+    /* transition 完整写法 
+      transition: 1s 1s height ease;
+    */
+    /*
+      在同一行transition语句中，可以分别指定多个属性
+      transition: 0.3s height, 0.3s 1s width;
+    */
+    .box {
+      width: 200px;
+      height: 200px;
+      border: 1px solid;
+      margin: 100px auto;
+      background-image: linear-gradient(135deg, transparent 25%, black 25%, black 50%, transparent 50%, transparent 75%, black 75%, black);
+      background-size: 50px 50px;
+      background-color: slategray;
+      transition: 0.3s height;
+      /* transition-timing-function 也可以自定义cubic-bezier 
+        transition: 1s cubic-bezier(.83,.97,.05,1.44);
+      */
+
+    }
+    .box:hover {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>
