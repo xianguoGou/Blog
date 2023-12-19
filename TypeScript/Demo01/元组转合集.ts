@@ -16,3 +16,8 @@ type TupleToUnion<T extends any[]> = T[number]
 type arr = [123, '456', true]
 
 type aa = arr[number]  // arr[number]  返回得到一个  union 类型   true | 123 | "456"
+
+type Hex = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+type R = 'a' | 'b' | 'c' | 'd' | 'e' | 'f'
+
+type Color = `#${Hex}${Hex}${Hex}`
