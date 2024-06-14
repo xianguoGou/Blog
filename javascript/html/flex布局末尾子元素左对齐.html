@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .list {
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+        margin: 10px;
+      }
+      .list:last-child {
+        margin-right: auto;
+      }
+
+      /* 如果最后一行是3个元素 */
+      /* .list:last-child:nth-child(4n - 1) {
+        margin-right: calc(24% + 4% / 3);
+      } */
+      /* 如果最后一行是2个元素 */
+      /* .list:last-child:nth-child(4n - 2) {
+        margin-right: calc(48% + 8% / 3);
+      } */
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+    </div>
+  </body>
+</html>
