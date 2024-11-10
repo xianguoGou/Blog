@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>活动价：¥ <span>700 </span></div>
+    <script src="./animate.js"></script>
+    <script>
+        var span = document.querySelector('div span');
+        createAnimation({
+            from: 688,
+            to: 99,
+            totalMS: 1000,
+            duration: 15,
+            onMove: function(val) {
+                span.innerText = val.toFixed(2);
+            },
+            onEnd: function() {
+                span.style.color = 'red'
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ball {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: fixed;
+            /* top: 50%;
+            left: 50%; */
+        }
+    </style>
+</head>
+<body>
+    <div class="ball"></div>
+    <script>
+        // 随机颜色
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min
+        }
+        // 小球每隔20毫秒移动一次
+        var ball = document.querySelector('.ball');
+
+        function randomColor() {
+            const r = getRandom(0, 255);
+            const g = getRandom(0, 255);
+            const b = getRandom(0, 255);
+            const rgb = `rgb(${r}, ${g}, ${b})`;
+            ball.style.backgroundColor = rgb;
+        }
+
+        // 获取屏幕宽度和高度
+        var screenW = document.documentElement.clientWidth;
+        var screenH = document.documentElement.clientHeight;
+        var ew = ball.clientWidth, eh = ball.clientHeight;
+        // 设置小球最大横纵坐标
+        var maxLeft = screenW - ew;
+        var maxTop = screenH - eh;
+        // 移动距离
+        var distanceX = 2, distanceY = 2;
+
+        setInterval(function() {
+             // 获取小球上一次的位置
+            var rect = ball.getBoundingClientRect();
+            var x = rect.left, y = rect.top;
+            var left = x + distanceX, top = y + distanceY;
+
+            // 判断小球是否碰到边界
+            if (left > maxLeft) {
+                left = maxLeft;
+                distanceX = -distanceX;
+                randomColor();
+            }
+            if (left < 0 ) {
+                left = 0;
+                distanceX = -distanceX;
+                randomColor();
+            }
+            if (top > maxTop) {
+                top = maxTop;
+                distanceY = -distanceY;
+                randomColor();
+            }
+            if (top < 0) {
+                top = 0;
+                distanceY = -distanceY;
+                randomColor();
+            }
+            // 改变移动方向
+            ball.style.left = left + 'px';
+            ball.style.top = top + 'px';
+        }, 20)
+    </script>
+</body>
+</html>
