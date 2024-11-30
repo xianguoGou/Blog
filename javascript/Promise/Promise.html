@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./Promise.js"></script>
+</head>
+<body>
+    <h2>Promise</h2>
+    <p>Promise 是一套专门处理异步场景的规范，，它能有效避免回调地狱的产生，使异步代码更加清晰、简洁、规范。</p>
+    <p>Promise A+ 规范</p>
+    <h3>1. 为什么要使用Promise？</h3>
+    <p>Promise 是异步编程的一种解决方案，它最早由社区提出，ES6 规范中正式引入。</p>
+    <h3>注意点：</h3>
+    <p style="color: red;">1. then方法必定会返回一个新的 promise 对象 (可以理解为： 后续处理也是一个异步任务)</p>
+    <p>2. 新任务的状态取决于后续处理：</p>
+    <ul type="circle">
+        <li>若没有相关的后续处理，新任务的状态和前任务一致，数据为前任务的数据</li>
+        <li>若有后续处理但还未执行，新任务挂起</li>
+        <li>若后续处理执行了，则根据后续处理的情况确定新任务的状态：</li>
+        <ul type ="square">
+            <li>后续处理执行无错，新任务的状态为完成，数据为后续处理的返回值</li>
+            <li>后续处理执行有错，新任务的状态为失败，数据为异常对象</li>
+            <li>后续执行后返回的是一个任务对象， 新任务的状态和数据与该任务对象一致</li>
+        </ul>
+
+    </ul>
+
+    <script>
+        // new Promise((resolve, reject) => {
+        //     throw new Error('error')
+        // }).then(() => {
+        //     console.log('success')
+        // }, (error) => {
+        //     console.log(error)
+        // })
+
+        // 等价于
+        // new Promise((resolve, reject) => {
+        //     reject(new Error('error2'))
+        //     // throw new Error('error2')
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+    </script>
+</body>
+</html>
