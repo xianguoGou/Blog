@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 封装fetch请求
+       async function getHeroes() {
+        // 写法一
+        // const resp = await fetch('https://study.duyiedu.com/api/herolist').then(res => res.json());
+        // return resp;
+        
+        // 写法二
+           const resp = await fetch('https://study.duyiedu.com/api/herolist')
+           return await resp.json()
+           
+        }
+        getHeroes().then(data => {
+            console.log(data);
+        });
+    </script>
+</body>
+</html>

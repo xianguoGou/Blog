@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p><input type="text" id="loginId"></p>
+    <p><input type="password" id="loginPwd"></p>
+    <button>登录</button>
+    <script>
+        const btn = document.querySelector('button')
+        const loginId = document.querySelector('#loginId')
+        const loginPwd = document.querySelector('#loginPwd')
+        btn.addEventListener('click', async () => {
+            const id = loginId.value, pwd = loginPwd.value
+            const params = {
+                loginId: id,
+                loginPwd: pwd
+            }
+             const response = await fetch('https://study.duyiedu.com/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(params)
+            })
+            const body = await response.json()
+            if (body.code === 0) {
+                alert('登录成功')
+            } else {
+                alert(body.msg)
+            }
+            console.log(body)
+        })
+    </script>
+</body>
+</html>

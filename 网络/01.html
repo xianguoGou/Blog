@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>网络</h2>
+
+    <h3>1. http 请求头 由三部分组成: 请求行、请求头、请求体</h3>
+    <ul>
+        <li>请求行: GET /index.html HTTP/1.1</li>
+        <li>请求头: Host: www.example.com</li>
+        <li>请求体: {a: 1, b: 2}</li>
+    </ul>
+
+    <h3>2. http 响应头 由三部分组成: 响应行、响应头、响应体</h3>
+    <ul>
+        <li>响应行: HTTP/1.1 200 OK</li>
+        <li>响应头: Content-Type: text/html</li>
+        <li>响应体: &lt;html&gt;&lt;body&gt;Hello, World!&lt;/body&gt;&lt;/html&gt;</li>
+    </ul>
+    <h4>2.1 常见的相应头：</h4>
+    <ul>
+        <li>Content-Type: 响应体的类型, 主要包括以下内容：</li>
+        <ul>
+            <li>text/plain: 普通的纯文本，浏览器通常会以纯文本方式显示</li>
+            <li>text/html: HTML 文档，浏览器通常会将其渲染为网页</li>
+            <li>image/jpeg: 浏览器会将它视为 JPG 图片</li>
+            <li>application/json: JSON 数据</li>
+            <li>text/css: CSS 样式表, 浏览器通常会将其渲染为样式</li>
+            <li>application/javascript 或 text/javascript : js 代码, 浏览器通常会使用 js 执行引擎将它解析执行</li>
+            <li>attachment: 附件，浏览器看到这个类型，通常会触发下载功能</li>
+            <li>MIME 类型: 自定义的 MIME 类型</li>
+        </ul>
+    </ul>
+    <h3>浏览器 === 用户代理</h3>
+</body>
+</html>

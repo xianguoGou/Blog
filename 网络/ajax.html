@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Ajax</h2>
+    <h3>Ajax 使用一个构造函数 XMLHttpRequest 来发送请求，简称 XHR ，所以这套API又称为 XHR API</h3>
+    <h3>由于XHR 有诸多缺陷，所以在HTML5 和 ES6之后，又出现了 fetch 函数来发送请求，所以这套API又称为 fetch API</h3>
+    <p style="color: red;">注意： 无论是 XHR 还是 fetch， 他们都是实现Ajax的一种技术手段，只是API不同</p>
+
+    <script>
+        // 1. XMLHttpRequest
+        // const xhr = new XMLHttpRequest()
+        // xhr.open('GET', 'https://study.duyiedu.com/api/herolist')
+        // xhr.setRequestHeader('Content-Type', 'application/json')
+        // xhr.send(null)
+        // xhr.onreadystatechange = function() {
+        //     // 当服务器返回响应体时，readyState状态为4
+        //     if (xhr.readyState === 4) {
+        //         const response = JSON.parse(xhr.responseText)
+        //         console.log(response)
+        //     }
+        // }
+
+
+        // 2. fetch
+        // fetch 方法返回的是一个 Promise，当收到服务器的响应头之后，Promise完成
+        // 完成之后，会给一个响应头对象，可以通过响应头对象获取响应头信息
+        fetch('https://study.duyiedu.com/api/herolist').then(resp => {
+            // 获取响应头信息
+            // console.log(resp.headers)
+            // for (const header of resp.headers.keys()) {
+            //     console.log(header, resp.headers.get(header))
+            // }
+
+            // 获取响应体信息
+            // console.log(resp.json())
+            return resp.json()
+        }).then(data => {
+            console.log(data)
+        })
+    </script>
+</body>
+</html>
