@@ -65,12 +65,18 @@ const API = (function(){
         const resp = await get('/api/chat/history')
         return await resp.json();
     }
+
+    // 退出登录
+    async function loginOut() {
+        localStorage.removeItem(TOKEN_KEY)
+    }
     return {
         register,
         login,
         existUser,
         profile,
         chat,
-        chatHistory
+        chatHistory,
+        loginOut
     }
 })()
