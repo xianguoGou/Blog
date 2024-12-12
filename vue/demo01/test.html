@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>{{ title }}</h1>
+      <ul>
+        <li v-for="(item, index) in products">
+          商品名称：{{ item.name}}，库存：<button
+            @click="handleStock(item, item.stock - 1)"
+          >
+            -
+          </button>
+          {{ item.stock }}
+
+          <button @click="handleStock(item, item.stock + 1)">+</button>
+          <button @click="removeProduct(index)">删除</button>
+        </li>
+      </ul>
+      <p>合计：{{ total }}</p>
+
+      <!-- <div>
+        <p>这是一段文字</p>
+      </div> -->
+    </div>
+    <script src="./vue.min.js"></script>
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          title: "商品管理系统",
+          products: [
+            {
+              name: "iPhone",
+              stock: 10,
+            },
+            {
+              name: "huawei",
+              stock: 5,
+            },
+            {
+              name: "XiaoMi",
+              stock: 9,
+            },
+          ],
+        },
+        computed: {
+          total() {
+            return this.products.reduce((a, b) => a + b.stock, 0);
+          },
+        },
+        methods: {
+          handleStock(item, stock) {
+            item.stock = stock;
+          },
+          removeProduct(index) {
+            this.products.splice(index, 1);
+          },
+        },
+        // 调用render函数，返回虚拟dom
+        // render(h) {
+        //   const vnode = h("div", [
+        //     h("p", "这是一段文字"),
+        //     h("span", "这是一个span元素"),
+        //   ]);
+        //   console.log(vnode);
+        //   return vnode
+        // },
+      });
+    </script>
+  </body>
+</html>
