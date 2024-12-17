@@ -1,0 +1,34 @@
+@import "~@/styles/var.less";
+@import "~@/styles/mixins.less";
+.message {
+  .self-center();
+  z-index: 999;
+  color: #fff;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  line-height: 2;
+  border-radius: 5px;
+  box-shadow: -2px 1px 5px rgba(0, 0, 0, 0.5);
+  transition: 0.3s;
+  transform: translate(-50%, -50%) translateY(25px);
+  opacity: 0;
+  // 解决translate会导致换行
+  white-space: nowrap;
+  &-success {
+    background-color: @success;
+  }
+  &-error {
+    background-color: @danger;
+  }
+  &-warn {
+    background-color: @warn;
+  }
+  &-info {
+    background-color: @primary;
+  }
+}
+.icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
