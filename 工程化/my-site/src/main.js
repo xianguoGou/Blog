@@ -3,6 +3,8 @@ import App from "./App.vue";
 import router from '@/router';
 import "./styles/global.less";
 import { showMessage } from "@/utils";
+import "@/mock";
+import "@/api/banner";
 
 // import Icon from '@/components/Icon'
 // import getComponentRootDom from '@/utils/getComponentRootDom'
