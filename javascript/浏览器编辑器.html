@@ -12,18 +12,30 @@
         position: absolute;
         left: 0;
         top: 0;
+        color: #999;
       }
       .left {
-        background-color: lightcyan;
+        background-color: #181818;
         width: 200px;
+        overflow-y: scroll;
+        padding: 0 5px;
       }
       .right {
-        background-color: lightblue;
+        background-color: #1f1f1f;
         flex: 1;
+        overflow-y: scroll;
+        padding: 10px;
       }
-      .open-btn {
+      .button {
+        cursor: pointer;
         margin-top: 20px;
         margin-left: 15px;
+        outline: none;
+        border: none;
+        padding: 5px 10px;
+        width: 80%;
+        border-radius: 5px;
+        background-color: #333;
       }
       ul > li:hover {
         background-color: rgba(0, 0, 0, 0.2);
@@ -36,16 +48,16 @@
   <body>
     <div class="container">
       <div class="left">
-        <button class="open-btn" onclick="openFolder()">打开文件夹</button>
-        <p>文件夹内容</p>
+        <button class="button" onclick="openFolder()">打开文件夹</button>
       </div>
-      <div class="right"></div>
+      <div class="right" contenteditable></div>
     </div>
     <script>
       // 生成一个固定10位数的随机数
       function randomNum() {
         return Math.floor(Math.random() * 1000000000) + 1;
       }
+      // 创建一个 <li> 元素树
       function createDomElementTree(data) {
         // 创建一个 <li> 元素来表示当前节点
         const li = document.createElement("li");
@@ -63,6 +75,7 @@
 
         return li; // 返回当前 <li> 元素
       }
+      
       // 读取文件内容
       async function readFileContent(fileReader) {
         return new Promise(async (resolve, reject) => {
@@ -76,12 +89,14 @@
           };
         });
       }
+      // 打开文件夹
       async function openFolder() {
         // 打开文件夹, 返回一个文件夹句柄
         var handle = await window.showDirectoryPicker();
         await processHandler(handle);
         console.log("handle", handle);
         if (handle) {
+          document.querySelector(".button").style = "display:none";
           const flattenData = flattenTree(handle);
           console.log("flattenData", flattenData);
           // 注册li点击事件
@@ -93,6 +108,7 @@
               const file = e.target.id;
               console.log("file", file);
               const targetFile = flattenData.find((item) => item.id == file);
+              if (targetFile instanceof FileSystemDirectoryHandle) return;
               const content = await readFileContent(targetFile);
               rightPanel.innerText = content;
             }
@@ -104,6 +120,7 @@
         console.log("subMenuDom", subMenuDom);
         leftMenu.appendChild(subMenuDom);
       }
+      
       // 处理文件夹内容
       async function processHandler(handle) {
         // 判断是否是文件
@@ -124,6 +141,7 @@
           }
         }
       }
+      
       // 数组扁平化
       function flattenTree(data) {
         let result = [];
