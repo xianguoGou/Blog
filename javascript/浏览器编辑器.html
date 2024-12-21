@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      .left {
+        background-color: lightcyan;
+        width: 200px;
+      }
+      .right {
+        background-color: lightblue;
+        flex: 1;
+      }
+      .open-btn {
+        margin-top: 20px;
+        margin-left: 15px;
+      }
+      ul > li:hover {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+      ul > li {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left">
+        <button class="open-btn" onclick="openFolder()">打开文件夹</button>
+        <p>文件夹内容</p>
+      </div>
+      <div class="right"></div>
+    </div>
+    <script>
+      // 生成一个固定10位数的随机数
+      function randomNum() {
+        return Math.floor(Math.random() * 1000000000) + 1;
+      }
+      function createDomElementTree(data) {
+        // 创建一个 <li> 元素来表示当前节点
+        const li = document.createElement("li");
+        li.textContent = data.name;
+        li.id = data.id;
+
+        // 如果当前节点有子节点，则递归生成子节点
+        if (data.children) {
+          const ul = document.createElement("ul"); // 创建一个新的 <ul> 容器来存放子节点
+          data.children.forEach((child) => {
+            ul.appendChild(createDomElementTree(child)); // 递归地为每个子节点调用创建函数
+          });
+          li.appendChild(ul); // 将 <ul> 添加到当前 <li> 元素中
+        }
+
+        return li; // 返回当前 <li> 元素
+      }
+      // 读取文件内容
+      async function readFileContent(fileReader) {
+        return new Promise(async (resolve, reject) => {
+          console.log("fileReader", fileReader);
+          const file = await fileReader.getFile();
+          const ready = new FileReader();
+          ready.readAsText(file);
+          ready.onload = function (e) {
+            console.log("e.target.result", e.target.result);
+            resolve(e.target.result);
+          };
+        });
+      }
+      async function openFolder() {
+        // 打开文件夹, 返回一个文件夹句柄
+        var handle = await window.showDirectoryPicker();
+        await processHandler(handle);
+        console.log("handle", handle);
+        if (handle) {
+          const flattenData = flattenTree(handle);
+          console.log("flattenData", flattenData);
+          // 注册li点击事件
+          const leftPanel = document.querySelector(".left");
+          const rightPanel = document.querySelector(".right");
+          leftPanel.addEventListener("click", async (e) => {
+            if (e.target.tagName === "UL") return;
+            if (e.target.tagName === "LI") {
+              const file = e.target.id;
+              console.log("file", file);
+              const targetFile = flattenData.find((item) => item.id == file);
+              const content = await readFileContent(targetFile);
+              rightPanel.innerText = content;
+            }
+          });
+        }
+
+        const leftMenu = document.querySelector(".left");
+        const subMenuDom = createDomElementTree(handle);
+        console.log("subMenuDom", subMenuDom);
+        leftMenu.appendChild(subMenuDom);
+      }
+      // 处理文件夹内容
+      async function processHandler(handle) {
+        // 判断是否是文件
+        if (handle.kind === "file") return;
+        // 获取文件夹内所有文件, 返回一个包含文件和文件夹的"异步迭代器"
+        const entries = await handle.values();
+        // 递归处理，把文件夹内容处理成树形结构
+        handle.children = [];
+        handle.id = randomNum();
+        // 遍历文件夹内所有文件
+        for await (const subHandle of entries) {
+          // console.log('subHandle', subHandle)
+          subHandle.id = randomNum();
+          handle.children.push(subHandle);
+          if (subHandle.kind === "directory") {
+            // 如果是文件夹, 递归处理
+            await processHandler(subHandle);
+          }
+        }
+      }
+      // 数组扁平化
+      function flattenTree(data) {
+        let result = [];
+
+        // 将当前节点添加到结果数组中，作为一个对象
+        result.push(data);
+
+        // 如果当前节点有子节点，则递归扁平化子节点
+        if (data.children) {
+          data.children.forEach((child) => {
+            result = result.concat(flattenTree(child)); // 合并子节点
+          });
+        }
+
+        return result;
+      }
+    </script>
+  </body>
+</html>
