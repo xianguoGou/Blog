@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container" ref="container" @wheel="handleWheel">
+  <div v-loading="isLoading" class="home-container" ref="container" @wheel="handleWheel">
     <ul
       class="carousel-container"
       :style="{
@@ -50,6 +50,7 @@ export default {
       index: 0,
       containerHeight: 0,
       switching: false, // 是否正在滚动
+      isLoading: true, // 是否正在加载
     };
   },
   computed: {
@@ -86,6 +87,7 @@ export default {
   },
   async created() {
     this.banners = await getBanners();
+    this.isLoading = false;
     // console.log(this.banners);
   },
   mounted() {

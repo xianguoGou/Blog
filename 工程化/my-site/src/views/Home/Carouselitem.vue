@@ -98,7 +98,7 @@ export default {
         width: this.$refs.image.clientWidth,
         height: this.$refs.image.clientHeight,
       };
-      console.log(this.containerSize, this.imageSize);
+      // console.log(this.containerSize, this.imageSize);
     },
   },
 };
