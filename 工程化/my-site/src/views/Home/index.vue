@@ -1,19 +1,24 @@
 <template>
-  <div class="home-container" ref="container">
+  <div class="home-container" ref="container" @wheel="handleWheel">
     <ul
       class="carousel-container"
       :style="{
         marginTop,
       }"
+      @transitionend="handleTransitionEnd"
     >
       <li v-for="item in banners" :key="item.id">
-        <CarouselItem />
+        <CarouselItem :carousel="item" />
       </li>
     </ul>
-    <div class="icon icon-up" v-show="index >=1" @click="switchTo(index - 1)">
+    <div class="icon icon-up" v-show="index >= 1" @click="switchTo(index - 1)">
       <Icon type="arrowUp" />
     </div>
-    <div class="icon icon-down" v-show="index < banners.length - 1" @click="switchTo(index + 1)">
+    <div
+      class="icon icon-down"
+      v-show="index < banners.length - 1"
+      @click="switchTo(index + 1)"
+    >
       <Icon type="arrowDown" />
     </div>
     <ul class="indicator">
@@ -42,8 +47,9 @@ export default {
   data() {
     return {
       banners: [],
-      index: 1,
+      index: 0,
       containerHeight: 0,
+      switching: false, // 是否正在滚动
     };
   },
   computed: {
@@ -54,15 +60,41 @@ export default {
   methods: {
     switchTo(i) {
       this.index = i;
-    }
+    },
+    // 鼠标滚轮事件
+    handleWheel(e) {
+      // console.log(e.deltaY);
+      if (this.switching || (e.deltaY >= -5 && e.deltaY <= 5)) return;
+      if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+        // console.log("向下滚动");
+        this.switching = true;
+        this.index++;
+      } else if (e.deltaY < -5 && this.index > 0) {
+        // console.log("向上滚动");
+        this.switching = true;
+        this.index--;
+      }
+    },
+    // 轮播图切换动画结束事件
+    handleTransitionEnd() {
+      this.switching = false;
+    },
+    // 窗口大小改变事件
+    handleResize() {
+      this.containerHeight = this.$refs.container.clientHeight;
+    },
   },
   async created() {
     this.banners = await getBanners();
-    console.log(this.banners);
+    // console.log(this.banners);
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
+    window.addEventListener("resize", this.handleResize);
   },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
+  }
 };
 </script>
 
@@ -73,7 +105,7 @@ export default {
 .home-container {
   width: 100%;
   height: 100%;
-  background-color: @words;
+  // background-color: @words;
   position: relative;
   overflow: hidden;
 }
