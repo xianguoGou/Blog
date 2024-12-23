@@ -7,7 +7,7 @@
       }"
       @transitionend="handleTransitionEnd"
     >
-      <li v-for="item in banners" :key="item.id">
+      <li v-for="item in data" :key="item.id">
         <CarouselItem :carousel="item" />
       </li>
     </ul>
@@ -16,14 +16,14 @@
     </div>
     <div
       class="icon icon-down"
-      v-show="index < banners.length - 1"
+      v-show="index < data.length - 1"
       @click="switchTo(index + 1)"
     >
       <Icon type="arrowDown" />
     </div>
     <ul class="indicator">
       <li
-        v-for="(item, i) in banners"
+        v-for="(item, i) in data"
         :key="item.id"
         :class="{
           active: index === i,
@@ -38,19 +38,19 @@
 import Icon from "@/components/Icon";
 import { getBanners } from "@/api/banner";
 import CarouselItem from "./Carouselitem";
+import fetchData from "@/mixins/fetchData";
 export default {
   name: "Home",
   components: {
     Icon,
     CarouselItem,
   },
+  mixins: [fetchData()],
   data() {
     return {
-      banners: [],
       index: 0,
       containerHeight: 0,
       switching: false, // 是否正在滚动
-      isLoading: true, // 是否正在加载
     };
   },
   computed: {
@@ -66,7 +66,7 @@ export default {
     handleWheel(e) {
       // console.log(e.deltaY);
       if (this.switching || (e.deltaY >= -5 && e.deltaY <= 5)) return;
-      if (e.deltaY > 5 && this.index < this.banners.length - 1) {
+      if (e.deltaY > 5 && this.index < this.data.length - 1) {
         // console.log("向下滚动");
         this.switching = true;
         this.index++;
@@ -84,11 +84,10 @@ export default {
     handleResize() {
       this.containerHeight = this.$refs.container.clientHeight;
     },
-  },
-  async created() {
-    this.banners = await getBanners();
-    this.isLoading = false;
-    // console.log(this.banners);
+    // 获取远程数据
+    async fetchData() {
+      return await getBanners();
+    }
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
