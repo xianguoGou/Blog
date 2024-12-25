@@ -45,7 +45,7 @@ export default {
     Icon,
     CarouselItem,
   },
-  mixins: [fetchData()],
+  mixins: [fetchData([])],
   data() {
     return {
       index: 0,
