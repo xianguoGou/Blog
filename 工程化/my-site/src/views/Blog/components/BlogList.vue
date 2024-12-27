@@ -89,6 +89,7 @@ export default {
   watch: {
     async $route() {
       this.isLoading = true;
+      this.$refs.container.scrollTop = 0;
       this.data = await this.fetchData();
       this.isLoading = false;
     }

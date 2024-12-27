@@ -1,6 +1,18 @@
 import Mock from "mockjs";
 import qs from "querystring";
 
+Mock.mock("/api/blogtype", "get", {
+  code: 0,
+  err: "",
+  "data|10-20": [
+    {
+      "id|+1": 1,
+      name: "分类@id",
+      "articleCount|0-300": 0,
+      "order|+1": 1,
+    },
+  ],
+});
 Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function(options) {
   const query = qs.parse(options.url);
 
@@ -29,16 +41,4 @@ Mock.mock(/^\/api\/blog(\?.+)?$/, "get", function(options) {
       ],
     },
   });
-});
-Mock.mock("/api/blogtype", "get", {
-  code: 0,
-  err: "",
-  "data|10-20": [
-    {
-      "id|+1": 1,
-      name: "分类@id",
-      "articleCount|0-300": 0,
-      "order|+1": 1,
-    },
-  ],
 });
