@@ -5,7 +5,8 @@ import router from "@/router";
 import "./styles/global.less";
 import { showMessage } from "@/utils";
 import vLoading from "@/directives/loading";
-import * as blogApi from "@/api/blog";
+import "./utils/eventBus"
+// import * as blogApi from "@/api/blog";
 
 
 // 全局注册指令

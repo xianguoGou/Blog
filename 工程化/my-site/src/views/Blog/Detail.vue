@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div class="main-container" v-loading="isLoading">
+    <div ref="mainContainer"  class="main-container" v-loading="isLoading">
       <BlogDetail :blog="data" v-if="data"></BlogDetail>
        <BlogComment />
     </div>
@@ -27,10 +27,26 @@ export default {
     BlogToc,
     BlogComment
   },
+  mounted() {
+    this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
+  },
+  updated() {
+    const hash = location.hash
+    location.hash = ""
+    setTimeout(() => {
+      location.hash = hash
+    }, 50)
+  },
   methods: {
     async fetchData() {
       return await getBlogDetail(this.$route.params.id);
     },
+    handleScroll() {
+      this.$bus.$emit("mainScroll", this.$refs.mainContainer)
+    }
   },
 };
 </script>
