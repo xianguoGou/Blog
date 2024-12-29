@@ -18,7 +18,7 @@ new Vue({
 }).$mount("#app");
 
 // 测试api接口
-blogApi.getBlogDetail('xxxxx').then(res => console.log('文章详情：', res))
+// blogApi.getBlogDetail("xxxxx").then((res) => console.log("文章详情：", res));
 
 // blogApi.getBlogComment('11').then(res => console.log('文章评论：', res))
 
