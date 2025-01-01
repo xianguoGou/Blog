@@ -20,7 +20,7 @@ export default {
                 this.show = false
                 return
             }
-            this.show = dom.scrollTop > 500
+            this.show = dom.scrollTop > 800
         },
         handleSetScroll() {
             this.$bus.$emit('mainSetScroll', 0)
