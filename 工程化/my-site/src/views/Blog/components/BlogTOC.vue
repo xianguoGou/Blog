@@ -63,7 +63,8 @@ export default {
       console.log(item);
     },
     // 设置activeAnchor为正确的值
-    setSelect() {
+    setSelect(scrollDom) {
+      if (!scrollDom) return;
       this.activeAnchor = "";
       const range = 100;
       for (const dom of this.doms) {

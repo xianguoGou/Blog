@@ -1,7 +1,6 @@
 <template>
   <div class="blog-comment-container">
     <MessageArea
-      v-if="!isLoading"
       title="评论列表"
       :subTitle="`(${data.total})`"
       :list="data.rows"
@@ -26,9 +25,40 @@ export default {
       limit: 10,
     };
   },
+  computed: {
+    hasMore() {
+      return this.data.rows.length < this.data.total;
+    }
+  },
+  created() {
+    this.$bus.$on("mainScroll", this.handleMainScroll)
+  },
+  destroyed() {
+    this.$bus.$off("mainScroll", this.handleMainScroll)
+  },
   methods: {
+    handleMainScroll(dom) {
+      if (this.isLoading || !dom) return;
+      const range = 100;
+      const dec = Math.abs(dom.scrollTop + dom.clientHeight - dom.scrollHeight);
+      if (dec <= range) {
+        console.log("fetchMore")
+        this.fetchMore();
+      }
+      // console.log(dom)
+    },
     async fetchData() {
       return await getBlogComment(this.$route.params.id, this.page, this.limit);
+    },
+    async fetchMore() {
+      if(!this.hasMore) return;
+      this.isLoading = true;
+      this.page++;
+      const resp = await this.fetchData();
+      this.data.total = resp.total;
+      this.data.rows = this.data.rows.concat(resp.rows);
+      this.isLoading = false;
+
     },
     async handleSubmit(formData, callback) {
       const resData = await postBlogComment({

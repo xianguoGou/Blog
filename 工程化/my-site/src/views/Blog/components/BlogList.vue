@@ -74,6 +74,15 @@ export default {
       blogList: [],
     };
   },
+  mounted() {
+    this.$bus.$on('mainSetScroll',this.handleMainSetScroll)
+    this.$refs.container.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    this.$bus.$off('mainSetScroll',this.handleMainSetScroll)
+    this.$bus.$emit('mainScroll')
+    this.$refs.container.removeEventListener("scroll", this.handleScroll);
+  },
   computed: {
     routeInfo() {
       const categoryId = +this.$route.params.categoryId || -1;
@@ -119,6 +128,12 @@ export default {
         })
       }
       console.log('handlePageChange', page)
+    },
+    handleScroll() {
+      this.$bus.$emit("mainScroll", this.$refs.container)
+    },
+    handleMainSetScroll(scrollTop) {
+      this.$refs.container.scrollTop = scrollTop
     }
   },
 };

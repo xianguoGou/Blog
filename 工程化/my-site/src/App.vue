@@ -14,17 +14,20 @@
         </div>
       </template> -->
     </Layout>
+    <ToTop />
   </div>
 </template>
 
 <script>
 import Layout from "@/components/Layout"
 import SiteAside from "@/components/SiteAside"
+import ToTop from "@/components/ToTop"
 export default {
   name: 'App',
   components: {
     Layout,
     SiteAside,
+    ToTop
   }
 }
 </script>

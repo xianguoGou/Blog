@@ -2,7 +2,7 @@
   <Layout>
     <div ref="mainContainer"  class="main-container" v-loading="isLoading">
       <BlogDetail :blog="data" v-if="data"></BlogDetail>
-       <BlogComment />
+       <BlogComment v-if="!isLoading" />
     </div>
     <template #right>
       <div class="right-container" v-loading="isLoading">
@@ -28,9 +28,12 @@ export default {
     BlogComment
   },
   mounted() {
+    this.$bus.$on('mainSetScroll',this.handleMainSetScroll)
     this.$refs.mainContainer.addEventListener("scroll", this.handleScroll);
   },
-  destroyed() {
+  beforeDestroy() {
+    this.$bus.$emit('mainScroll')
+    this.$bus.$off('mainSetScroll',this.handleMainSetScroll)
     this.$refs.mainContainer.removeEventListener("scroll", this.handleScroll);
   },
   updated() {
@@ -46,6 +49,9 @@ export default {
     },
     handleScroll() {
       this.$bus.$emit("mainScroll", this.$refs.mainContainer)
+    },
+    handleMainSetScroll(scrollTop) {
+      this.$refs.mainContainer.scrollTop = scrollTop
     }
   },
 };
