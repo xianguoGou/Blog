@@ -23,6 +23,5 @@
 
 import Vue from 'vue'
 const vm = new Vue({})
-console.log(vm)
 Vue.prototype.$bus = vm
-// export default new Vue({})
+export default vm

@@ -5,12 +5,15 @@ import router from "@/router";
 import "./styles/global.less";
 import { showMessage } from "@/utils";
 import vLoading from "@/directives/loading";
+import vLazy from "@/directives/lazy"
 import "./utils/eventBus"
 // import * as blogApi from "@/api/blog";
 
 
 // 全局注册指令
 Vue.directive("loading", vLoading);
+Vue.directive("lazy", vLazy);
+
 // 挂载全局方法
 Vue.prototype.$showMessage = showMessage;
 new Vue({
