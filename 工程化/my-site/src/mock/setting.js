@@ -4,7 +4,7 @@ Mock.mock("/api/setting",  "get", {
   code: 0,
   msg: "",
   data: {
-    avatar: "http://www.duyiedu.com/source/img/logo.png",
+    avatar: "https://img0.baidu.com/it/u=3555674527,3811220504&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1734282000&t=daee528913638de8ff6d314753ea9fb7",
     siteTitle: "我的个人空间",
     github: "https://github.com/DuYi-Edu",
     qq: "3263023350",

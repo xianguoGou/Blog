@@ -1,4 +1,5 @@
 import { getSetting } from "@/api/setting";
+import { titleController } from "@/utils";
 export default {
   namespaced: true,
   state: {
@@ -28,6 +29,9 @@ export default {
         link.rel = "shortcut icon";
         link.href = res.favicon;
         document.querySelector("head").appendChild(link);
+        if (res.siteTitle) {
+          titleController.setSiteTitle(res.siteTitle);
+        }
       }
     },
   },
