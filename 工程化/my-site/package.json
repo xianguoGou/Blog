@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --modern",
     "lint": "vue-cli-service lint",
     "test:Avatar": "vue serve ./src/components/Avatar/test.vue",
     "test:Pager": "vue serve ./src/components/Pager/test.vue",
@@ -37,7 +37,8 @@
     "eslint-plugin-vue": "^6.2.2",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "eslintConfig": {
     "root": true,
