@@ -10,6 +10,7 @@ import "./utils/eventBus"
 import store from "@/store"
 // import * as blogApi from "@/api/blog";
 // import { getSetting } from "@/api/setting";
+// import { getAbout } from "@/api/about"
 
 // 请求全局设置api
 store.dispatch('setting/fetchSetting');
@@ -33,3 +34,5 @@ new Vue({
 
 // blogApi.postBlogComment().then(res => console.log('发表评论：', res))
 // getSetting().then(res => console.log('网站全局配置：', res))
+
+// getAbout().then(res => console.log('关于我：', res))
