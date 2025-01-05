@@ -1,17 +1,20 @@
 <template>
   <div class="site-aside-container">
-    <Avatar
-      :size="100"
-      url="https://img0.baidu.com/it/u=3555674527,3811220504&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1734282000&t=daee528913638de8ff6d314753ea9fb7"
-    />
-    <h2 class="title">Virgo</h2>
-    <Menu />
-    <Contact />
-    <p class="footer">© 2021 virgo. All rights reserved.</p>
+    <template v-if="data">
+      <Avatar
+        :size="100"
+        url="https://img0.baidu.com/it/u=3555674527,3811220504&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1734282000&t=daee528913638de8ff6d314753ea9fb7"
+      />
+      <h2 class="title">{{ data.siteTitle }}</h2>
+      <Menu />
+      <Contact />
+      <p class="footer">{{ data.icp }}</p>
+    </template>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Avatar from "@/components/Avatar";
 import Menu from "@/components/SiteAside/Menu";
 import Contact from "@/components/SiteAside/Contact";
@@ -21,6 +24,7 @@ export default {
     Menu,
     Contact,
   },
+  computed: mapState("setting", ["data"]),
 };
 </script>
 

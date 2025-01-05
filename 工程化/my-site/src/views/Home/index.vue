@@ -1,5 +1,5 @@
 <template>
-  <div v-loading="isLoading" class="home-container" ref="container" @wheel="handleWheel">
+  <div v-loading="loading" class="home-container" ref="container" @wheel="handleWheel">
     <ul
       class="carousel-container"
       :style="{
@@ -35,17 +35,15 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import Icon from "@/components/Icon";
-import { getBanners } from "@/api/banner";
 import CarouselItem from "./Carouselitem";
-import fetchData from "@/mixins/fetchData";
 export default {
   name: "Home",
   components: {
     Icon,
     CarouselItem,
   },
-  mixins: [fetchData([])],
   data() {
     return {
       index: 0,
@@ -53,7 +51,11 @@ export default {
       switching: false, // 是否正在滚动
     };
   },
+  created() {
+    this.$store.dispatch("banner/fetchBanner");
+  },
   computed: {
+    ...mapState("banner", ["data", "loading"]),
     marginTop() {
       return -this.index * this.containerHeight + "px";
     },
@@ -84,10 +86,6 @@ export default {
     handleResize() {
       this.containerHeight = this.$refs.container.clientHeight;
     },
-    // 获取远程数据
-    async fetchData() {
-      return await getBanners();
-    }
   },
   mounted() {
     this.containerHeight = this.$refs.container.clientHeight;
