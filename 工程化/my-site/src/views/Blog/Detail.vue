@@ -39,6 +39,10 @@ export default {
   methods: {
     async fetchData() {
       const detail = await getBlogDetail(this.$route.params.id);
+      if (!detail) {
+        this.$router.push("/404")
+        return
+      }
       titleController.setRouteTitle(detail.title)
       return detail;
     },
