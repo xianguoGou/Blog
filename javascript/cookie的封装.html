@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: #bfa;
+            position: absolute;
+            left: 100px;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <!-- 封装一个简单的cookie管理函数 -->
+    <script>
+        var manageCookie = {
+            // 设置cookie 约定date为秒数
+            set: function(name, value, date) {
+                document.cookie = name + "=" + value + "; max-age=" + date
+            },
+            // 获取cookie
+            get: function(name) {
+                const cookie = document.cookie.split("; ")
+                for (let i = 0; i < cookie.length; i++) {
+                    const item = cookie[i].split("=")
+                    if (item[0] === name) {
+                        return item[1]
+                    }
+                }
+            },
+            // 删除cookie
+            remove: function(name) {
+                this.set(name, "", 0)
+            },
+        }
+    </script>
+    <script>
+        // 利用 cookie 实现拖拽功能
+        var drag = {
+            init: function(dom) {
+                this.dom = dom
+                this.bindEvent()
+                
+                const cacheLeft = manageCookie.get("boxLeft")
+                const cacheTop = manageCookie.get("boxTop")
+                if (cacheLeft && cacheTop) {
+                    this.dom.style.left = cacheLeft + "px"
+                    this.dom.style.top = cacheTop + "px"
+                }
+            },
+            bindEvent: function() {
+                this.dom.onmousedown = this.mouseDown.bind(this)
+            },
+            mouseDown: function(e) {
+                document.onmousemove = this.mouseMove.bind(this)
+                document.onmouseup = this.mouseUp.bind(this)
+                this.disX = e.clientX - this.dom.offsetLeft
+                this.disY = e.clientY - this.dom.offsetTop
+            },
+            mouseMove: function(e) {
+                this.left = e.clientX - this.disX;
+                this.top = e.clientY - this.disY;
+
+                this.dom.style.left = this.left + "px"
+                this.dom.style.top = this.top + "px"
+            },
+            mouseUp: function() {
+                document.onmousemove = null
+                document.onmouseup = null
+
+                // 保存拖拽后的位置, 1小时后失效
+                manageCookie.set("boxLeft", this.left, 3600)
+                manageCookie.set("boxTop", this.top, 3600)
+            }
+        }
+        drag.init(document.getElementById("box"))
+    </script>
+</body>
+</html>
