@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .water {
+            width: 100px;
+            height: 100px;
+            background-color: #3fa;
+            margin: 100px auto;
+            border-radius: 72% 28% 56% 44% / 50% 20% 80% 50%;
+            box-shadow: inset 3px 3px 5px 2px rgba(0, 0, 0, 0.3), inset -3px -3px 5px 2px rgba(255, 255, 255, 0.6), 3px 3px 5px 3px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        .water::before {
+            content: '';
+            position: absolute;
+            left: 40%;
+            top: 20%;
+            width: 15px;
+            height: 15px;
+            background-color: #fff;
+            border-radius: 38% 62% 56% 44% / 50% 47% 53% 50%;
+        }
+        .water::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 60%;
+            width: 8px;
+            height: 8px;
+            background-color: #fff;
+            border-radius: 38% 62% 56% 44% / 50% 47% 53% 50%;
+        }
+        body {
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <!-- 水滴效果 -->
+    <div class="water"></div>
+</body>
+</html>
