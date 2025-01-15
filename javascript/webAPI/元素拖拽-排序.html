@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .dragBox {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+      .dropContent {
+        width: 300px;
+        height: 300px;
+        border: 2px dashed black;
+      }
+      .draging {
+        opacity: 0.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dropContent"></div>
+    <div class="dragBox" draggable="true"></div>
+    <script>
+        var dragBox = document.querySelector('.dragBox');
+        var dropContent = document.querySelector('.dropContent');
+    </script>
+  </body>
+</html>
