@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+        }
+  
+        li {
+          border: 1px solid #ccc;
+          padding: 10px;
+          margin: 5px;
+          background-color: #f9f9f9;
+          cursor: grab;
+        }
+  
+        li.dragging {
+          opacity: 0.5;
+        }
+      </style>
+  </head>
+  <body>
+    <ul id="sortableList">
+        <li draggable="true">Item 1</li>
+        <li draggable="true">Item 2</li>
+        <li draggable="true">Item 3</li>
+        <li draggable="true">Item 4</li>
+        <li draggable="true">Item 5</li>
+    </ul>
+    <script>
+        const sortableList = document.getElementById("sortableList");
+        let draggingElement = null;
+        // 监听拖拽开始事件
+        sortableList.addEventListener("dragstart", function(e) {
+          e.target.classList.add("dragging");
+          draggingElement = e.target;
+          console.log('draggingElement:', draggingElement)
+        });
+        // 监听拖拽移动事件
+        sortableList.addEventListener("dragover", function(e) {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = "move";
+          if (e.target !== draggingElement && e.target.tagName === "LI"){
+            const targetElement = e.target.getBoundingClientRect();
+            // console.log('targetElement:', targetElement)
+            // 获取鼠标拖拽过程中，鼠标相对于目标元素的位置
+            const mouseY = e.clientY - targetElement.top;
+            // 如果鼠标位置在目标元素的上半部分，则插入到目标元素之前
+            if (mouseY < targetElement.height / 2) {
+                sortableList.insertBefore(draggingElement, e.target);
+            } else {
+                // 如果鼠标位置在目标元素的下半部分，则插入到目标元素之后
+                sortableList.insertBefore(draggingElement, e.target.nextSibling);
+            }
+          }
+        });
+        // 监听拖拽结束事件
+        sortableList.addEventListener("dragend", function(e) {
+            e.target.classList.remove("dragging");
+            draggingElement = null;
+        })
+    </script>
+  </body>
+</html>
