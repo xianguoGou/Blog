@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File API</title>
+</head>
+<body>
+    <input type="file">
+    <script>
+        const file = document.querySelector('input[type="file"]');
+        file.addEventListener('change',function(e){
+            const files = e.target.files;
+            // 读取图片文件
+            // const reader = new FileReader();
+            // reader.onload = function(e) {
+            //     const img = new Image();
+            //     img.src = e.target.result;
+            //     document.body.appendChild(img);
+            // }
+            // reader.readAsDataURL(files[0]);
+            // 读取文本文件
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                console.log(text);
+            }
+            reader.readAsText(files[0]);
+            console.log(files);
+        })
+    </script>
+</body>
+</html>

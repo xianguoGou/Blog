@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blob</title>
+</head>
+<body>
+    <script>
+        const blob = new Blob(['Hello, world!'], {type: 'text/plain'})
+        console.log(blob)
+        // blob.text().then(text => console.log(text))
+        const firstBlob = blob.slice(0, 5)
+        const lastBlob = blob.slice(5)
+        firstBlob.text().then(text => console.log(text))
+        lastBlob.text().then(text => console.log(text))
+    </script>
+</body>
+</html>
