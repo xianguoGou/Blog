@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const worker = new Worker('./assets/index.js', {
+            type:'module',
+            name: 'worker1',
+        })
+        // 通知worker处理消息
+        worker.postMessage('hello')
+        // 监听worker返回的消息
+        worker.onmessage = function(e) {
+            console.log('worker返回的消息：', e.data)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 链接数据库 (2是版本号)
+        const request = window.indexedDB.open('user', 2)
+        console.log('request', request)
+        request.onupgradeneeded = function(event) {
+            console.log('数据库初始化，或者版本升级')
+            // 获取数据库对象本身
+            const db = event.target.result
+            // 创建数据存储对象
+            const store = db.createObjectStore('USER')
+            store.add({ name: 'virgo', age: 25 }, "用户1")
+            // console.log('store', store)
+        }
+        request.onsuccess = function(event) {
+            console.log('数据库连接成功');
+            const db = event.target.result
+            // 可读/写数据对象
+            const transaction = db.transaction(['USER'], 'readwrite')
+            const store = transaction.objectStore('USER')
+            store.add({ name: 'gxg', age: 18 }, "用户2")
+            store.add({ name: 'test', age: 1 }, "用户3")
+            // 读取数据
+            const request = store.get('用户1')
+            request.onsuccess = function(event) {
+                console.log('读取数据成功', event.target.result)
+            }
+            // 修改数据
+            // store.put({ name: 'gxg', age: 26 }, "用户1")
+            // 删除数据
+            // store.delete('用户1')
+            // 查找所有数据
+            const result = store.getAll()
+            result.onsuccess = function(e) {
+                console.log('查找所有数据成功!', e.target.result)
+            }
+            console.log('result', result)
+        }
+        request.onerror = function(event) {
+            console.log('数据库连接失败了', event.target.error)
+        }
+    </script>
+</body>
+</html>
