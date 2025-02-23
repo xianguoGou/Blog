@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- worker处理大量数据计算 -->
+    <script>
+        // 创建一个worker
+        const worker = new Worker('./assets/test.js')
+        // 向worker发送消息
+        worker.postMessage(10)
+        // 监听worker的message事件
+        worker.onmessage = function(e) {
+            console.log(e.data)
+        }
+    </script>
+</body>
+</html>
