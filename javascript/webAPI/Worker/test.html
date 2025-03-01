@@ -9,7 +9,9 @@
     <!-- worker处理大量数据计算 -->
     <script>
         // 创建一个worker
-        const worker = new Worker('./assets/test.js')
+        const worker = new Worker('./assets/test.js', {
+            name: 'test-worker'
+        })
         // 向worker发送消息
         worker.postMessage(10)
         // 监听worker的message事件

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #afe;
+        position: absolute;
+        left: 100px;
+        top: 100px;
+        border-radius: 50%;
+      }
+    </style>
+    <script src="./assets/md5.min.js"></script>
+  </head>
+  <body>
+    <div class="box"></div>
+    <input type="file" />
+    <script src="./assets/run.js"></script>
+    <script>
+      // 大文件上传分片
+      const file = document.querySelector('input[type="file"]');
+      //   const worker = new Worker("./assets/fileWorker.js", {
+      //     type: "module",
+      //     name: "fileWorker",
+      //   });
+      const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
+      const MAX_WORKER = navigator.hardwareConcurrency || 4; // 最多4个worker并发上传
+      console.log('MAX_WORKER', MAX_WORKER)
+      // 记录worker完成的数量
+      let workerFinished = 0;
+      // 所有worker完成后，合并分片结果
+      let mergeResult = [];
+      file.addEventListener("change", async function (e) {
+        const file = e.target.files[0];
+        // worker.postMessage({
+        //     file,
+        //     CHUNK_SIZE,
+        // })
+        // worker.onmessage = function(e) {
+        //     console.log(e.data)
+        // }
+
+        // 多worker处理上传
+        // 计算分片的总数
+        const chunkNum = Math.ceil(file.size / CHUNK_SIZE);
+        // 每个worker负责的分片数
+        const workerNum = Math.ceil(chunkNum / MAX_WORKER);
+        for (let i = 0; i < MAX_WORKER; i++) {
+          const worker = new Worker("./assets/fileWorker.js", {
+            type: "module",
+            name: `worker${i}`,
+          });
+          // 计算每个worker的起始分片
+          const start = i * workerNum;
+          // 计算每个worker的结束分片
+          let end = start + workerNum;
+          // 如果结束分片大于总分片数，则取总分片数
+          if (end > chunkNum) {
+            end = chunkNum;
+          }
+          // 发送worker任务
+          worker.postMessage({
+            start,
+            end,
+            file,
+            CHUNK_SIZE
+          })
+          // 接收worker结果
+          worker.onmessage = function (e) {
+            console.log(e.data)
+            e.data.forEach(item => {
+                mergeResult[item.index] = item
+            })
+            // 记录worker完成的数量
+            workerFinished++;
+            console.log(`worker ${workerFinished} 完成了`)
+            // 当前worker完成后，结束当前worker
+            worker.terminate();
+            if (workerFinished === MAX_WORKER) {
+                // 所有worker完成后，合并分片
+                console.log('worker 都完成啦', mergeResult)
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
