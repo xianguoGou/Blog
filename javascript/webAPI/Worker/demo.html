@@ -30,7 +30,7 @@
       //   });
       const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
       const MAX_WORKER = navigator.hardwareConcurrency || 4; // 最多4个worker并发上传
-      console.log('MAX_WORKER', MAX_WORKER)
+      console.log("MAX_WORKER", MAX_WORKER);
       // 记录worker完成的数量
       let workerFinished = 0;
       // 所有worker完成后，合并分片结果
@@ -50,6 +50,7 @@
         const chunkNum = Math.ceil(file.size / CHUNK_SIZE);
         // 每个worker负责的分片数
         const workerNum = Math.ceil(chunkNum / MAX_WORKER);
+        console.log("workerNum", workerNum);
         for (let i = 0; i < MAX_WORKER; i++) {
           const worker = new Worker("./assets/fileWorker.js", {
             type: "module",
@@ -68,24 +69,24 @@
             start,
             end,
             file,
-            CHUNK_SIZE
-          })
+            CHUNK_SIZE,
+          });
           // 接收worker结果
           worker.onmessage = function (e) {
-            console.log(e.data)
-            e.data.forEach(item => {
-                mergeResult[item.index] = item
-            })
+            console.log(e.data);
+            e.data.forEach((item) => {
+              mergeResult[item.index] = item;
+            });
             // 记录worker完成的数量
             workerFinished++;
-            console.log(`worker ${workerFinished} 完成了`)
+            console.log(`worker ${workerFinished} 完成了`);
             // 当前worker完成后，结束当前worker
             worker.terminate();
             if (workerFinished === MAX_WORKER) {
-                // 所有worker完成后，合并分片
-                console.log('worker 都完成啦', mergeResult)
+              // 所有worker完成后，合并分片
+              console.log("worker 都完成啦", mergeResult);
             }
-          }
+          };
         }
       });
     </script>
