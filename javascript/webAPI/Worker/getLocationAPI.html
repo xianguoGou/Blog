@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="show-location"></div>
+        <button onclick="getLocation()">Get Location</button>
+        <script>
+            function getLocation() {
+                const showLocation = document.querySelector('.show-location')
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(position => {
+                        console.log('position', position)
+                        const { latitude, longitude, accuracy } = position.coords
+                        showLocation.innerHTML = `当前位置：<br/> 经度: ${longitude}，纬度: ${latitude}，精度: ${accuracy}`
+                    }, error => {
+                        console.log('error', error)
+                    });
+                } else { 
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+        </script>
+</body>
+</html>
