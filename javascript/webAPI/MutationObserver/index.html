@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutationObserver 监听页面元素发生变化的API</title>
+</head>
+<body>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+    <script>
+        const parent = document.querySelector('.parent');
+        const child = document.querySelector('.child');
+        const observer = new MutationObserver(mutations => {
+            console.log(mutations);
+        })
+        observer.observe(parent, {
+            attributes: true, // 监听属性变化 parent.setAttribute('class', 'new-class')
+            childList: true, // 监听子节点变化 parent.appendChild(document.createElement('div'))
+            characterData: true, // 监听文本节点变化 child.childNodes[0].data = 'vvv'
+            subtree: true
+        })
+    </script>
+</body>
+</html>
