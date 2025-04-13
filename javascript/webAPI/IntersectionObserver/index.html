@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      IntersectionObserver 提供了一种异步观察目标元素与其祖先元素交叉状态的方法
+    </title>
+    <style>
+      .content {
+        height: 500px;
+        width: 300px;
+        border: 1px solid #ccc;
+        overflow-y: scroll;
+      }
+      .content > div {
+        width: 100px;
+        height: 200px;
+        background-color: #ef0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <div class="1">1</div>
+      <div class="2">2</div>
+      <div class="3">3</div>
+      <div class="box">box</div>
+    </div>
+    <script>
+      const box = document.querySelector(".box");
+      const content = document.querySelector(".content");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          // 初始化时，会执行一次回调函数，此时判断是否有交叉情况发生变化
+          console.log("交叉情况发生变化");
+          console.log(entries);
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // 满足交叉条件时，取消观察
+                observer.unobserve(entry.target);
+                console.log("满足交叉条件");
+            } else {
+              console.log("不满足交叉条件");
+            }
+          });
+        },
+        {
+          root: content,
+          // rootMargin: '20px',
+          threshold: 1,
+        }
+      );
+      observer.observe(box);
+    </script>
+  </body>
+</html>
