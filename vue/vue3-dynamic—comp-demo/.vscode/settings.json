@@ -1,0 +1,4 @@
+{
+    "wxmlConfig.onSaveFormat": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

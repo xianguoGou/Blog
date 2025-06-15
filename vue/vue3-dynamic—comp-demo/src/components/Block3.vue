@@ -1,0 +1,1 @@
+<template>Block3</template>
