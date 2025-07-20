@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .parent {
+        /* 近身距离 */
+        perspective: 200px;
+        /* 在父元素中，从哪个角度去看子元素，视角不同，所看到的图形不一样 */
+        perspective-origin: center center;
+        /* 3D效果展示, 默认值 flat */
+        transform-style: preserve-3d;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #bfa;
+        /* margin: 200px auto; */
+        /* transform: perspective(200px) translateZ(-200px); */
+        /* transform: translateZ(-200px); */
+        transform: rotateX(45deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+  </body>
+</html>

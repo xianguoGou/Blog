@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 线性渐变 - border带样式边框 */
+      .box {
+        width: 300px;
+        height: 150px;
+        margin: 0 auto;
+        border: 10px solid;
+        border-image: repeating-linear-gradient(
+            45deg,
+            transparent 0 10px,
+            #fa0 10px 20px
+          )
+          20;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>
