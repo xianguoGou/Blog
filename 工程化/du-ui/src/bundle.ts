@@ -23,7 +23,7 @@ library.add(fas)
 
 const components = [Icon, Button, Card, Dialog]
 
-function install(app: any) {
+const install = (app: any) => {
   components.forEach((component) => {
     app.component(component.name, component)
   })
@@ -36,4 +36,4 @@ export default {
   install,
 }
 // 按需导出组件
-export { Icon, Button, Card, Dialog }
+export { install, Icon, Button, Card, Dialog }

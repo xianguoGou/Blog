@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/du-plus.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./lib/du-plus.umd.cjs"></script>
+    <style>
+      .icons-container {
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+      <du-button>Button</du-button>
+      <div class="icons-container">
+        <du-icon icon="user-secret" rotation="90" size="xl" beat />
+        <du-icon icon="bars" rotation="270" size="xl" />
+        <du-icon icon="shield-halved" rotation="180" size="xl" />
+        <du-icon icon="file" flip="horizontal" size="xl" />
+        <du-icon icon="filter" flip="vertical" size="xl" />
+        <du-icon icon="folder-open" flip="both" size="xl" />
+      </div>
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const message = ref("Hello vue!");
+          return {
+            message,
+          };
+        },
+      });
+      console.log(DuPlus);
+      app.use(DuPlus);
+      app.mount("#app");
+    </script>
+  </body>
+</html>

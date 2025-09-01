@@ -1,6 +1,6 @@
 {
   "name": "du-plus-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "Du UI is a Vue 3.x component library",
   "keywords": [
@@ -19,6 +19,10 @@
     ".": {
       "import": "./dist/es/du-plus.js",
       "require": "./dist/umd/du-plus.umd.cjs"
+    },
+    "./style.css": {
+      "import": "./dist/du-plus.css",
+      "require": "./dist/umd/du-plus.css"
     }
   },
   "engines": {
