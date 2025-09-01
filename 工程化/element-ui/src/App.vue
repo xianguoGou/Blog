@@ -18,12 +18,10 @@
 <style scoped lang="scss">
 h1.title {
   text-align: center;
-  // margin-top: 5em;
   font-weight: 200;
 }
 
 .nav {
-  // border: 1px solid #ccc;
   display: flex;
   height: 50px;
   justify-content: space-evenly;
@@ -32,11 +30,8 @@ h1.title {
 
 .displayArea {
   margin-top: 2em;
-  // border: 1px solid #ccc;
-  display: flex;
-  justify-content: center;
 }
 .active {
-  border-bottom: 3px solid hsla(160, 100%, 37%, 1);
+  border-bottom: 3px solid var(--du-color-primary);
 }
 </style>

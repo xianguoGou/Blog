@@ -1,0 +1,81 @@
+@use 'sass:color';
+
+$colors: (
+  primary: #409eff,
+  success: #67c23a,
+  warning: #e6a23c,
+  danger: #f56c6c,
+  info: #909399,
+);
+
+:root {
+  // 生成主题色和不同亮度的颜色
+  @each $var, $color in $colors {
+    // 生成主题色
+    --du-color-#{$var}: #{$color};
+    // 生成不同亮度的颜色
+    @for $i from 1 through 4 {
+      --du-color-#{$var}-light-#{$i * 2 + 1}: #{color.mix(#fff, $color, ($i * 2 + 1) * 10%, rgb)};
+    }
+    // dark2 和 light8 不符合规律，需要单独生成
+    --du-color-#{$var}-light-8: #{color.mix(#fff, $color, 80 * 1%)};
+    --du-color-#{$var}-dark-2: #{color.mix(#000, $color, 20 * 1%)};
+  }
+
+  // 接下来，还有一些其他的颜色变量
+  // 对应的是 ElementUI 里面的中性色
+  --du-color-white: #fff;
+  --du-color-black: #000;
+  --du-bg-color: #ffffff;
+  --du-bg-color-page: #f2f3f5;
+  --du-bg-color-overlay: #ffffff;
+  --du-text-color-primary: #303133;
+  --du-text-color-regular: #606266;
+  --du-text-color-secondary: #909399;
+  --du-text-color-placeholder: #a8abb2;
+  --du-text-color-disabled: #c0c4cc;
+  --du-border-color: #dcdfe6;
+  --du-border-color-light: #e4e7ed;
+  --du-border-color-lighter: #ebeef5;
+  --du-border-color-extra-light: #f2f6fc;
+  --du-border-color-dark: #d4d7de;
+  --du-border-color-darker: #cdd0d6;
+  --du-fill-color: #f0f2f5;
+  --du-fill-color-light: #f5f7fa;
+  --du-fill-color-lighter: #fafafa;
+  --du-fill-color-extra-light: #fafcff;
+  --du-fill-color-dark: #ebedf0;
+  --du-fill-color-darker: #e6e8eb;
+  --du-fill-color-blank: #ffffff;
+
+  // 和 border 相关的变量
+  --du-border-width: 1px;
+  --du-border-style: solid;
+  --du-border-color-hover: var(--du-text-color-disabled);
+  --du-border: var(--du-border-width) var(--du-border-style) var(--du-border-color);
+  --du-border-radius-base: 4px;
+  --du-border-radius-small: 2px;
+  --du-border-radius-round: 20px;
+  --du-border-radius-circle: 100%;
+
+  // 和 font 相关的变量
+  --du-font-size-extra-large: 20px;
+  --du-font-size-large: 18px;
+  --du-font-size-medium: 16px;
+  --du-font-size-base: 14px;
+  --du-font-size-small: 13px;
+  --du-font-size-extra-small: 12px;
+  --du-font-family:
+    'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+  --du-font-weight-primary: 500;
+
+  // 和 disabled 相关的变量
+  --du-disabled-bg-color: var(--du-fill-color-light);
+  --du-disabled-text-color: var(--du-text-color-placeholder);
+  --du-disabled-border-color: var(--du-border-color-light);
+
+  // 和 transition 过渡相关的变量
+  --du-transition-duration: 0.3s;
+  --du-transition-duration-fast: 0.2s;
+}

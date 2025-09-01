@@ -1,0 +1,18 @@
+.du-icon {
+  --du-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--du-icon-color);
+  font-size: inherit;
+}
+
+$type: (primary, warning, danger, info, success);
+@each $val in $type {
+  // 当你挂上 du-icon--primary 之后，--du-icon-color 就会变成 var(--du-color-primary)
+  .du-icon--#{$val} {
+    --du-icon-color: var(--du-color-#{$val});
+  }
+}

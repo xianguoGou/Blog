@@ -1,0 +1,7 @@
+@use './vars.scss';
+@use './reset.scss';
+// 引入组件相关的样式
+@use './components/icon.scss';
+@use './components/button.scss';
+@use './components/card.scss';
+@use './components/dialog.scss';
