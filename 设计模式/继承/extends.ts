@@ -1,7 +1,7 @@
 /** ES6 中的继承 **/
 
 // 父类
-class Person {
+export class Person {
   private _name: string;
   private _age: number;
   constructor(name: string, age: number) {
