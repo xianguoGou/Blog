@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2016", // 配置编译目标代码的版本标准
+    "module": "es6", // 配置编译目标使用的模块化标准
+    "lib": ["DOM", "ESNext", "DOM.Iterable", "ScriptHost"],
+    "outDir": "./dist", // 编译后的 js 所存放的目录
+    "strict": true,
+    "removeComments": true, // 去除注释
+    "esModuleInterop": true // 启用 ES 模块化交互非 ES 模块导出
+  },
+  "include": ["./src"] // 默认编译项目目录下所有的 ts 文件，这里表示只编译 src 目录下的 ts 文件
+}
