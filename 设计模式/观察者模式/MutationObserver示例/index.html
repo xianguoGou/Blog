@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="myList">
+      <li>Item1</li>
+      <li>Item2</li>
+    </ul>
+    <button id="addBtn">添加Item</button>
+    <button id="removeBtn">移除最后一个Item</button>
+    <button id="modifyBtn">修改最后一个Item</button>
+  </body>
+  <script>
+    // 获取相应的 DOM 元素
+    const myList = document.getElementById("myList");
+    const addBtn = document.getElementById("addBtn");
+    const removeBtn = document.getElementById("removeBtn");
+    const modifyBtn = document.getElementById("modifyBtn");
+
+    // 创建一个 MutationObserver 实例
+    // mutationsList 是一个 MutationRecord 对象的数组
+    // 每一个 MutationRecord 对象代表一个被观察到的 DOM 对象
+    const observer = new MutationObserver((mutationsList) => {
+      // 遍历这些被观察的 DOM 对象
+      for (let mutation of mutationsList) {
+        if (mutation.type === "childList") {
+          // 这里是 DOM 节点发生了改变
+          console.log("A child node has been added or removed.");
+        } else if (mutation.type === "attributes") {
+          // DOM 属性发生了改变
+          console.log(
+            "The " + mutation.attributeName + " attribute was modified."
+          );
+        }
+      }
+    });
+
+    // 接下来我们调用 observe 来进行观察
+    // 该方法接收两个参数，第一个是要观察的 DOM 元素，第二个是一个配置对象
+    observer.observe(myList, {
+      attributes: true, // 会观察 DOM 元素的属性变化
+      childList: true, // 会观察 DOM 元素的直接子节点变化
+      subtree: true, // 会观察 DOM 元素的所有后代节点
+    });
+
+    // 后面就是对 DOM 元素进行操作
+    addBtn.onclick = function () {
+      const li = document.createElement("li");
+      li.textContent = "Item" + (myList.children.length + 1);
+      myList.appendChild(li);
+    };
+
+    removeBtn.onclick = function () {
+      myList.removeChild(myList.lastElementChild);
+    };
+
+    modifyBtn.onclick = function () {
+      myList.lastElementChild.setAttribute("style", "color: red;");
+    };
+  </script>
+</html>
